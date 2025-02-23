@@ -1,0 +1,41 @@
+import { fastifyCors } from "@fastify/cors";
+import fastifySwagger from "@fastify/swagger";
+import fastifySwaggerUi from "@fastify/swagger-ui";
+import { fastify } from 'fastify';
+import { jsonSchemaTransform, serializerCompiler, validatorCompiler, ZodTypeProvider } from "fastify-type-provider-zod";
+import { env } from "./env";
+import { subscribeToEventRoute } from "./routes/subscribe-to-event-route";
+const packageJson = require("../package.json");
+
+const app = fastify().withTypeProvider<ZodTypeProvider>();
+
+app.setSerializerCompiler(serializerCompiler);
+app.setValidatorCompiler(validatorCompiler);
+
+app.register(fastifyCors,{
+    origin: env.CORS_ALLOWED_DOMAINS
+});
+
+app.register(fastifySwagger,{
+    openapi:{
+        info:{
+            title: packageJson.name,
+            version: packageJson.version
+        }
+    },
+    transform:  jsonSchemaTransform
+})
+
+app.register(fastifySwaggerUi,{
+    routePrefix: '/docs'
+})
+
+app.register(subscribeToEventRoute)
+
+app.get('/healthcheck',(req,reply)=>{
+    return reply.send({ok:"OK"})
+}); 
+
+app.listen({port: env.PORT}).then((s)=>{
+    console.log(`HTTP Server running on: ${s}`)
+});
