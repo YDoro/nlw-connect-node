@@ -11,6 +11,7 @@ import {
 import { env } from './env'
 import { accessInviteLinkRoute } from './routes/access-invite-link-route'
 import { getSubscriberInviteClicksRoute } from './routes/get-subscriber-inite-clicks-route'
+import { getSubscriberInvitesCountRoute } from './routes/get-subscriber-invites-count-route'
 import { subscribeToEventRoute } from './routes/subscribe-to-event-route'
 const packageJson = require('../package.json')
 
@@ -40,6 +41,7 @@ app.register(fastifySwaggerUi, {
 app.register(subscribeToEventRoute)
 app.register(accessInviteLinkRoute)
 app.register(getSubscriberInviteClicksRoute)
+app.register(getSubscriberInvitesCountRoute)
 
 app.get('/healthcheck', (req, reply) => {
   return reply.send({ ok: 'OK' })

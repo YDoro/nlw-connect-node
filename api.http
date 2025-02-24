@@ -11,3 +11,6 @@ GET http://localhost:3333/invites/123456
 
 ###
 GET http://localhost:3333/subscribers/123456/ranking/clicks
+
+###
+GET http://localhost:3333/subscribers/123456/ranking/count
