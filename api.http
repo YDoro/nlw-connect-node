@@ -17,3 +17,6 @@ GET http://localhost:3333/subscribers/123456/ranking/count
 
 ###
 GET http://localhost:3333/subscribers/123456/ranking/position
+
+###
+GET http://localhost:3333/ranking
