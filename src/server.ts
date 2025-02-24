@@ -9,6 +9,7 @@ import {
   validatorCompiler,
 } from 'fastify-type-provider-zod'
 import { env } from './env'
+import { accessInviteLinkRoute } from './routes/access-invite-link-route'
 import { subscribeToEventRoute } from './routes/subscribe-to-event-route'
 const packageJson = require('../package.json')
 
@@ -36,6 +37,7 @@ app.register(fastifySwaggerUi, {
 })
 
 app.register(subscribeToEventRoute)
+app.register(accessInviteLinkRoute)
 
 app.get('/healthcheck', (req, reply) => {
   return reply.send({ ok: 'OK' })

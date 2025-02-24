@@ -5,6 +5,7 @@ const envSchema = z.object({
   CORS_ALLOWED_DOMAINS: z.string().default('*'),
   POSTGRES_URL: z.string().url(),
   REDIS_URL: z.string().url(),
+  SITE_URL: z.string().url(),
 })
 
 export const env = envSchema.parse(process.env)
